@@ -1,8 +1,11 @@
 package tests;
 
+import data.TestData;
 import models.*;
 import org.junit.jupiter.api.Test;
 
+import static data.ApiEndpoints.REGISTER;
+import static data.ApiEndpoints.USERS;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +23,7 @@ public class ApiTests extends TestBase {
             given(requestPostPutSpec)
                     .body(userData)
                     .when()
-                    .post("/users")
+                    .post(USERS)
                     .then()
                     .spec(response201)
                     .extract().as(CreateAndUpdateUserResponse.class));
@@ -43,7 +46,7 @@ public class ApiTests extends TestBase {
                 given(requestPostPutSpec)
                         .body(userData)
                         .when()
-                        .post("/users")
+                        .post(USERS)
                         .then()
                         .spec(response201)
                         .extract().as(CreateAndUpdateUserResponse.class));
@@ -66,7 +69,7 @@ public class ApiTests extends TestBase {
                 given(requestPostPutSpec)
                         .body(userData)
                         .when()
-                        .post("/register")
+                        .post(REGISTER)
                         .then()
                         .spec(response200)
                         .extract().as(RegisterUserResponse.class));
@@ -86,7 +89,7 @@ public class ApiTests extends TestBase {
                 given(requestPostPutSpec)
                         .body(userData)
                         .when()
-                        .post("/register")
+                        .post(REGISTER)
                         .then()
                         .spec(response400)
                         .extract().as(RegisterUserResponse.class));
@@ -101,7 +104,7 @@ public class ApiTests extends TestBase {
 
         SingleUserResponse response = step("Make request", () ->
                 given(requestGetDeleteSpec)
-                        .get("/users/2")
+                        .get(USERS + "/2")
                         .then()
                         .spec(response200)
                         .extract().as(SingleUserResponse.class));
@@ -121,7 +124,7 @@ public class ApiTests extends TestBase {
     void deleteUserTest() {
 
         given(requestGetDeleteSpec)
-                .delete("/users/2")
+                .delete(USERS + "/2")
                 .then()
                 .spec(response204);
     }
