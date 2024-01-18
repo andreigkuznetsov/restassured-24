@@ -10,7 +10,7 @@ import static io.restassured.filter.log.LogDetail.BODY;
 import static io.restassured.filter.log.LogDetail.STATUS;
 import static io.restassured.http.ContentType.JSON;
 
-public class userActionsSpec {
+public class UserActionsSpec {
 
     public static RequestSpecification requestPostPutSpec = with()
             .filter(withCustomTemplates())
